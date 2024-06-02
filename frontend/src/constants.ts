@@ -1,0 +1,17 @@
+export const BACKGROUND_COLOR = "#ffffff";  
+export const LOGIN_REGISTER_COLOR = "#F2DFD3";
+export const FONT_FAMILY = "Josefin Sans, sans-serif";
+export const BUTTON_COLOR = "#F0AA7D";
+export const WHITE_COLOR = "#ffffff";
+export const BLACK_COLOR = "#000000";
+export const JET_COLOR = "#2A2B2A";
+export const BLUSH_COLOR = "#E75A7C";
+export const EGGPLANT_COLOR = "#5E4955";
+export const PERIWINKLE_COLOR = "#BBBDF6";
+export const PEACH_COLOR = "#F6BE9A";
+export const ANGER_COLOR = "#FF0000"; // red
+export const FEAR_COLOR = "#A020F0"; // purple
+export const JOY_COLOR = "#FFD700"; // yellow
+export const LOVE_COLOR = "#C71585"; // pink
+export const SADNESS_COLOR = "#0000FF"; // blue
+export const SURPRISE_COLOR = "#00FF00"; // green
