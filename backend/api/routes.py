@@ -272,8 +272,12 @@ class PanicDisorderEntryRoute(Resource):
 
     @token_required
     def delete(self, current_user, id):
+        print(id)
         entry = PanicDisorderEntry.find_by_id(id)
         if not entry:
-            return {'success': False, 'msg': 'Entry does not exist or does not belong to this user'}, 400
+            return {'success': False, 'msg': 'Entry does not exist'}, 400
+        if entry.user_id != current_user.id:
+            return {'success': False, 'msg': 'Entry does not belong to this user'}, 400
+
         entry.delete()
         return {'success': True, 'msg': 'Panic disorder entry deleted successfully'}, 200

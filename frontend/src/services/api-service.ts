@@ -31,7 +31,7 @@ export const getDisorder = async (token: string, id: number): Promise<Disorder> 
         .get(`http://127.0.0.1:5000/api/disorder/${id}`, headers)
         .then((response) => {
             console.log(response);
-            resolve(response.data.disorder);
+            resolve(response.data.entry);
         })
         .catch((error) => {
             console.log(error);
@@ -47,7 +47,7 @@ export const updateDisorder = async (token: string, disorder: Disorder): Promise
     };
     console.log(disorder);
     return new Promise((resolve, reject) => {
-        axios.put(`http://127.0.0.1:5000/api/disorder/${disorder._id}`, disorder, headers)
+        axios.put(`http://127.0.0.1:5000/api/disorder/${disorder.id}`, disorder, headers)
         .then((response) => {
             console.log(response);
             resolve(response.data.msg);

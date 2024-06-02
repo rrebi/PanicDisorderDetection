@@ -47,6 +47,7 @@ import { UserPage } from "./pages/user-page/user-page";
 import { userPanelClassName } from "./App-style";
 import { AddDisorderPage } from "./pages/add-disorder-page/add-disorder-page";
 import { DisorderPage } from "./pages/disorder-page/disorder-page";
+import { UserDashboard } from "./pages/user-dashboard/user-dashboard";
 
 const App = () => {
   const [showPanel, setShowPanel] = useState(false);
@@ -96,7 +97,7 @@ const App = () => {
                 handleUsernameClick={handleUsernameClick}
                 setShowPanel={setShowPanel}
               />
-
+              <UserDashboard />
               <Panel
                 headerClassName={userPanelClassName}
                 isOpen={showPanel}

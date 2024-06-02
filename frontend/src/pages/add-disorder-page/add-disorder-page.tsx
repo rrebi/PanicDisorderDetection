@@ -47,7 +47,7 @@ export const AddDisorderPage = () => {
     addDisorder(token!, formData)
       .then((response) => {
         console.log("Response from API:", response);
-        navigate("/disorders");
+        navigate("/user");
       })
       .catch((error) => {
         console.log(error);
@@ -78,7 +78,7 @@ export const AddDisorderPage = () => {
   );
 
   const handleCancel = () => {
-    navigate("/disorders");
+    navigate("/user");
   };
 
   if (!token) {

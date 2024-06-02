@@ -1,13 +1,5 @@
-// export type Journal = {
-//     _id?: number;
-//     entry_title: string;
-//     entry_text: string;
-//     entry_date?: Date;
-//     entry_emotion?: string;
-// }
-
 export type Disorder = {
-    _id?: number;
+    id?: number;
     user_id: number;
     age: number;
     gender: number;  // 0 for Male, 1 for Female
