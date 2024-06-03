@@ -1,5 +1,7 @@
+import pickle
 from datetime import datetime, timedelta, timezone
 from functools import wraps
+import pandas as pd
 
 import jwt
 from flask import request
@@ -281,3 +283,49 @@ class PanicDisorderEntryRoute(Resource):
 
         entry.delete()
         return {'success': True, 'msg': 'Panic disorder entry deleted successfully'}, 200
+
+
+
+# Load the models
+try:
+    with open('modelsAI/svm_model.pkl', 'rb') as svm_file:
+        svm_model = pickle.load(svm_file)
+    with open('modelsAI/dtc_model.pkl', 'rb') as tree_file:
+        tree_model = pickle.load(tree_file)
+    with open('modelsAI/model.pkl', 'rb') as xgboost_file:
+        xgboost_model = pickle.load(xgboost_file)
+except Exception as e:
+    print(f"Error loading model: {e}")
+
+@rest_api.route('/api/predict/<int:id>/<string:algorithm>')
+class Predict(Resource):
+    @token_required
+    def get(self, current_user, id, algorithm):
+        try:
+            entry = PanicDisorderEntry.find_by_id(id)
+            if not entry:
+                return {'success': False, 'msg': 'Entry does not exist'}, 400
+            if entry.user_id != current_user.id:
+                return {'success': False, 'msg': 'Entry does not belong to this user'}, 400
+
+            data = entry.to_json()
+            df = pd.DataFrame([data])
+            df.drop(columns=['id', 'user_id'], inplace=True)  # Drop non-feature columns
+
+            print(f"Data for prediction: {df}")  # Debugging line
+
+            prediction = None
+            if algorithm == 'svm':
+                prediction = svm_model.predict(df)
+            elif algorithm == 'tree':
+                prediction = tree_model.predict(df)
+            elif algorithm == 'xgboost':
+                prediction = xgboost_model.predict(df)
+            else:
+                return {'success': False, 'msg': 'Invalid algorithm specified'}, 400
+
+            prediction_label = 'No Panic Disorder' if prediction[0] == 0 else 'Possible Panic Disorder'
+            return {'success': True, 'prediction': prediction_label}, 200
+        except Exception as e:
+            print(f"Prediction Exception: {e}")  # Debugging line
+            return {'success': False, 'msg': str(e)}, 500
