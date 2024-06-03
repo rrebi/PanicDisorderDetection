@@ -286,18 +286,51 @@ class PanicDisorderEntryRoute(Resource):
 
 
 
+
 # Load the models
 try:
-    with open('modelsAI/svm_model.pkl', 'rb') as svm_file:
+    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\svm_model.pkl', 'rb') as svm_file:
         svm_model = pickle.load(svm_file)
-    with open('modelsAI/dtc_model.pkl', 'rb') as tree_file:
+except Exception as e:
+    print(f"Error loading SVM model: {e}")
+    svm_model = None
+
+try:
+    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\dtc_model.pkl', 'rb') as tree_file:
         tree_model = pickle.load(tree_file)
-    with open('modelsAI/model.pkl', 'rb') as xgboost_file:
+except Exception as e:
+    print(f"Error loading Decision Tree model: {e}")
+    tree_model = None
+
+try:
+    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\model.pkl', 'rb') as xgboost_file:
         xgboost_model = pickle.load(xgboost_file)
 except Exception as e:
-    print(f"Error loading model: {e}")
+    print(f"Error loading XGBoost model: {e}")
+    xgboost_model = None
 
-@rest_api.route('/api/predict/<int:id>/<string:algorithm>')
+# Define the column mapping
+column_mapping = {
+    'id': 'Participant ID',
+    'age': 'Age',
+    'gender': 'Gender',
+    'family_history': 'Family History',
+    'personal_history': 'Personal History',
+    'current_stressors': 'Current Stressors',
+    'symptoms': 'Symptoms',
+    'severity': 'Severity',
+    'impact_on_life': 'Impact on Life',
+    'demographics': 'Demographics',
+    'medical_history': 'Medical History',
+    'psychiatric_history': 'Psychiatric History',
+    'substance_use': 'Substance Use',
+    'coping_mechanisms': 'Coping Mechanisms',
+    'social_support': 'Social Support',
+    'lifestyle_factors': 'Lifestyle Factors'
+}
+
+# Define the Predict endpoint
+@rest_api.route('/api/predict/<int:id>/<int:algorithm>')
 class Predict(Resource):
     @token_required
     def get(self, current_user, id, algorithm):
@@ -310,18 +343,33 @@ class Predict(Resource):
 
             data = entry.to_json()
             df = pd.DataFrame([data])
-            df.drop(columns=['id', 'user_id'], inplace=True)  # Drop non-feature columns
+
+            # Drop non-feature columns
+            df.drop(columns=['user_id'], inplace=True)
+
+            # Rename columns
+            df.rename(columns=column_mapping, inplace=True)
 
             print(f"Data for prediction: {df}")  # Debugging line
 
             prediction = None
-            if algorithm == 'svm':
-                prediction = svm_model.predict(df)
-            elif algorithm == 'tree':
-                prediction = tree_model.predict(df)
-            elif algorithm == 'xgboost':
-                prediction = xgboost_model.predict(df)
+            if algorithm == 0:
+                if svm_model is not None:
+                    prediction = svm_model.predict(df)
+                else:
+                    return {'success': False, 'msg': 'SVM model not loaded'}, 500
+            elif algorithm == 1:
+                if tree_model is not None:
+                    prediction = tree_model.predict(df)
+                else:
+                    return {'success': False, 'msg': 'Tree model not loaded'}, 500
+            elif algorithm == 2:
+                if xgboost_model is not None:
+                    prediction = xgboost_model.predict(df)
+                else:
+                    return {'success': False, 'msg': 'XGBoost model not loaded'}, 500
             else:
+                print(f"Invalid algorithm specified: {algorithm}")  # Debugging line
                 return {'success': False, 'msg': 'Invalid algorithm specified'}, 400
 
             prediction_label = 'No Panic Disorder' if prediction[0] == 0 else 'Possible Panic Disorder'

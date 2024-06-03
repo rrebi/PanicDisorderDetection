@@ -18,20 +18,20 @@ export const AddDisorderPage = () => {
   const [formData, setFormData] = useState<Disorder>({
     user_id: 1,
     age: 26,
-    gender: 1, // Female
-    family_history: 1, // Yes
-    personal_history: 1, // No
-    current_stressors: 2, // Low
-    symptoms: 1, // Panic attacks
-    severity: 2, // Severe
-    impact_on_life: 0, // Mild
-    demographics: 1, // Urban
-    medical_history: 0, // Diabetes
-    psychiatric_history: 2, // Depressive disorder
-    substance_use: 1, // Drugs
-    coping_mechanisms: 0, // Socializing
-    social_support: 2, // Low
-    lifestyle_factors: 0, // Sleep quality
+    gender: 1,
+    family_history: 1,
+    personal_history: 1,
+    current_stressors: 2,
+    symptoms: 1,
+    severity: 2,
+    impact_on_life: 0,
+    demographics: 1,
+    medical_history: 0,
+    psychiatric_history: 2,
+    substance_use: 1,
+    coping_mechanisms: 0,
+    social_support: 2,
+    lifestyle_factors: 0,
   });
 
   const [ageError, setAgeError] = useState<string>("");
@@ -123,8 +123,8 @@ export const AddDisorderPage = () => {
           value={formData.personal_history}
           onChange={handleChange}
         >
-          <option value={0}>No</option>
-          <option value={1}>Yes</option>
+          <option value={1}>No</option>
+          <option value={0}>Yes</option>
         </select>
       </label>
       <label>
@@ -134,9 +134,9 @@ export const AddDisorderPage = () => {
           value={formData.current_stressors}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
-          <option value={1}>Mild</option>
-          <option value={2}>Severe</option>
+          <option value={0}>Moderate</option>
+          <option value={1}>High</option>
+          <option value={2}>Low</option>
         </select>
       </label>
       <label>
@@ -146,11 +146,11 @@ export const AddDisorderPage = () => {
           value={formData.symptoms}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
-          <option value={1}>Mild</option>
-          <option value={2}>Moderate</option>
-          <option value={3}>Severe</option>
-          <option value={4}>Extreme</option>
+          <option value={0}>Shortness of breath</option>
+          <option value={1}>Panic attacks</option>
+          <option value={2}>Chest pain</option>
+          <option value={3}>Dizziness</option>
+          <option value={4}>Fear of losing control</option>
         </select>
       </label>
       <label>
@@ -172,9 +172,9 @@ export const AddDisorderPage = () => {
           value={formData.impact_on_life}
           onChange={handleChange}
         >
-          <option value={0}>Low</option>
-          <option value={1}>Moderate</option>
-          <option value={2}>High</option>
+          <option value={0}>Mild</option>
+          <option value={1}>Significant</option>
+          <option value={2}>Moderate</option>
         </select>
       </label>
       <label>
@@ -184,8 +184,8 @@ export const AddDisorderPage = () => {
           value={formData.demographics}
           onChange={handleChange}
         >
-          <option value={0}>Urban</option>
-          <option value={1}>Rural</option>
+          <option value={1}>Urban</option>
+          <option value={0}>Rural</option>
         </select>
       </label>
       <label>
@@ -195,10 +195,10 @@ export const AddDisorderPage = () => {
           value={formData.medical_history}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
-          <option value={1}>Mild</option>
-          <option value={2}>Moderate</option>
-          <option value={3}>Severe</option>
+          <option value={0}>Diabetes</option>
+          <option value={1}>Asthma</option>
+          <option value={2}>None</option>
+          <option value={3}>Heart disease</option>
         </select>
       </label>
       <label>
@@ -208,10 +208,10 @@ export const AddDisorderPage = () => {
           value={formData.psychiatric_history}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
-          <option value={1}>Mild</option>
-          <option value={2}>Moderate</option>
-          <option value={3}>Severe</option>
+          <option value={0}>Bipolar disorder</option>
+          <option value={1}>Anxiety disorder</option>
+          <option value={2}>Depressive disorder</option>
+          <option value={3}>None</option>
         </select>
       </label>
       <label>
@@ -222,8 +222,8 @@ export const AddDisorderPage = () => {
           onChange={handleChange}
         >
           <option value={0}>None</option>
-          <option value={1}>Occasional</option>
-          <option value={2}>Frequent</option>
+          <option value={1}>Drugs</option>
+          <option value={2}>Alcohol</option>
         </select>
       </label>
       <label>
@@ -233,10 +233,10 @@ export const AddDisorderPage = () => {
           value={formData.coping_mechanisms}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
-          <option value={1}>Poor</option>
-          <option value={2}>Moderate</option>
-          <option value={3}>Good</option>
+          <option value={0}>Socializing </option>
+          <option value={1}>Exercise </option>
+          <option value={2}>Seeking therapy</option>
+          <option value={3}>Meditation </option>
         </select>
       </label>
       <label>
@@ -246,9 +246,9 @@ export const AddDisorderPage = () => {
           value={formData.social_support}
           onChange={handleChange}
         >
-          <option value={0}>None</option>
+          <option value={0}>High</option>
           <option value={1}>Moderate</option>
-          <option value={2}>Strong</option>
+          <option value={2}>Low</option>
         </select>
       </label>
       <label>
@@ -258,9 +258,9 @@ export const AddDisorderPage = () => {
           value={formData.lifestyle_factors}
           onChange={handleChange}
         >
-          <option value={0}>Poor</option>
-          <option value={1}>Moderate</option>
-          <option value={2}>Good</option>
+          <option value={0}>Sleep quality</option>
+          <option value={1}>Exercise</option>
+          <option value={2}>Diet</option>
         </select>
       </label>
       <div className={buttonsClassName}>

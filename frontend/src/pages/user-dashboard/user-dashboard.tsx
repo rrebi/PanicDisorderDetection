@@ -56,6 +56,7 @@ export const UserDashboard = () => {
   const people: IDocumentCardActivityPerson[] = [
     { name: localStorage.getItem("username")!, profileImageSrc: "" },
   ];
+  4;
 
   // map disorders to disorder cards
   const disorderCards = disorders.map((disorder) => (
@@ -80,15 +81,15 @@ export const UserDashboard = () => {
 
   return (
     <div className={userDashboardMainDivClassName}>
-      <h1>Patient Dashboard</h1>
       <h2>Disorders</h2>
-      <div className={disorderDivClassName}>{disorderCards}</div>
       <DefaultButton
         className={addDisorderButtonClassName}
         iconProps={{ iconName: "Add" }}
         text="New Disorder"
         onClick={() => navigate("/user/add-disorder")}
       />
+      <br />
+      <div className={disorderDivClassName}>{disorderCards}</div>
     </div>
   );
 };

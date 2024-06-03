@@ -1,64 +1,67 @@
 import { mergeStyles } from "@fluentui/react";
-import { FONT_FAMILY, LOGIN_REGISTER_COLOR, PEACH_COLOR, WHITE_COLOR } from "../../constants";
+import { WHITE_COLOR } from "../../constants";
 
-export {};
+// Define the new color variables
+export const D_GREEN = "#1E4D2B";
+export const L_GREEN = "#B0C4A7";
+export const D_PURPLE = "#563C5C";
+export const L_PURPLE = "#8B8589";
+export const LL_PURPLE = "#DBD7D2";
 
 export const userDashboardMainDivClassName = mergeStyles({
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: WHITE_COLOR,
+    padding: "20px",
+    backgroundColor: LL_PURPLE,
+    minHeight: "100vh",
 });
 
 export const disorderDivClassName = mergeStyles({
-    width: "80%",
     display: "flex",
-    backgroundColor: LOGIN_REGISTER_COLOR,
     flexWrap: "wrap",
-    justifyContent: "space-around",
-    borderRadius: "10px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
+    gap: "20px",
 });
 
 export const disorderCardClassName = mergeStyles({
-    flexBasis: "33.33%",
-    marginTop: "10px",
-    marginBottom: "10px",
-    height:"18vh",
-    minHeight:"120px",
-    borderRadius: "10px",
-    display:"flex",
-    flexDirection:"column",
+    width: "200px",
+    cursor: "pointer",
+    backgroundColor: L_GREEN,
+    borderColor: D_GREEN,
+    borderWidth: "2px",
+    borderStyle: "solid",
+    selectors: {
+      ':hover': {
+        backgroundColor: D_GREEN,
+        color: "white",
+      },
+    },
 });
 
 export const disorderCardTitleClassName = mergeStyles({
-    fontFamily: FONT_FAMILY,
-    marginLeft: "5px",
-    marginTop: "10px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    color: D_PURPLE,
+    padding: "10px",
 });
 
 export const disorderCardDetailsClassName = mergeStyles({
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"space-between",
-    marginTop: "2vh"
+    padding: "10px",
+    backgroundColor: LL_PURPLE,
 });
 
 export const disorderCardDetailsTextClassName = mergeStyles({
-    display:"flex",
-    justifyContent: "space-evenly",
-    flexDirection: "column",
+    fontSize: "14px",
+    color: D_PURPLE,
 });
 
 export const addDisorderButtonClassName = mergeStyles({
-    backgroundColor: PEACH_COLOR,
-    color: WHITE_COLOR,
-    border: "none",
-    borderRadius: "15px",
-    width: "10vw",
-    height: "5vh",
-    marginTop: "5vh",
+    marginTop: "20px",
+    backgroundColor: L_PURPLE,
+    borderColor: D_PURPLE,
+    borderWidth: "2px",
+    borderStyle: "solid",
+    selectors: {
+      ':hover': {
+        backgroundColor: D_PURPLE,
+        color: "white",
+      },
+    },
 });

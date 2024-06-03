@@ -1,5 +1,5 @@
 import { IDialogStyles, ITextFieldStyles, mergeStyles } from "@fluentui/react";
-import { ANGER_COLOR, BLACK_COLOR, BUTTON_COLOR, FONT_FAMILY, LOGIN_REGISTER_COLOR, PEACH_COLOR, WHITE_COLOR } from "../../constants";
+import {  BLACK_COLOR, BUTTON_COLOR, D_GREEN, FONT_FAMILY, LOGIN_REGISTER_COLOR, PEACH_COLOR, WHITE_COLOR } from "../../constants";
 
 export const viewDisorderClassName = mergeStyles({
     backgroundColor: LOGIN_REGISTER_COLOR,
@@ -70,7 +70,7 @@ export const deleteButtonClassName = mergeStyles({
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
-    color: ANGER_COLOR
+    color: D_GREEN
 });
 
 export const cancelButtonClassName = mergeStyles({

@@ -71,6 +71,12 @@ const App = () => {
       });
   };
 
+  const goToAccount = () => {
+    window.location.href = "/account";
+  };
+  const goToDisorder = () => {
+    window.location.href = "/user";
+  };
   return (
     <>
       <img
@@ -106,7 +112,11 @@ const App = () => {
                 isBlocking={false}
                 closeButtonAriaLabel="Close"
               >
-                <UserPanel onLogout={handleLogout} />
+                <UserPanel
+                  onLogout={handleLogout}
+                  onGoToAccount={goToAccount}
+                  onGoToDisorder={goToDisorder}
+                />
               </Panel>
             </ProtectedRoute>
           }
@@ -130,7 +140,11 @@ const App = () => {
                 isBlocking={false}
                 closeButtonAriaLabel="Close"
               >
-                <UserPanel onLogout={handleLogout} />
+                <UserPanel
+                  onLogout={handleLogout}
+                  onGoToAccount={goToAccount}
+                  onGoToDisorder={goToDisorder}
+                />
               </Panel>
             </ProtectedRoute>
           }
@@ -153,7 +167,11 @@ const App = () => {
                 isBlocking={false}
                 closeButtonAriaLabel="Close"
               >
-                <UserPanel onLogout={handleLogout} />
+                <UserPanel
+                  onLogout={handleLogout}
+                  onGoToAccount={goToAccount}
+                  onGoToDisorder={goToDisorder}
+                />
               </Panel>
             </ProtectedRoute>
           }
@@ -176,7 +194,11 @@ const App = () => {
                 isBlocking={false}
                 closeButtonAriaLabel="Close"
               >
-                <UserPanel onLogout={handleLogout} />
+                <UserPanel
+                  onLogout={handleLogout}
+                  onGoToAccount={goToAccount}
+                  onGoToDisorder={goToDisorder}
+                />
               </Panel>
             </ProtectedRoute>
           }

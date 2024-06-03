@@ -52,6 +52,10 @@ export const DisorderPage = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    navigate("/user");
+  };
+
   const handleCancel = () => {
     setDisorder(initialDisorder);
     setEditing(false);
@@ -160,8 +164,8 @@ export const DisorderPage = () => {
               value={disorder?.personal_history || 0}
               onChange={handleChange}
             >
-              <option value={0}>No</option>
-              <option value={1}>Yes</option>
+              <option value={1}>No</option>
+              <option value={0}>Yes</option>
             </select>
           </label>
           <label>
@@ -171,8 +175,8 @@ export const DisorderPage = () => {
               value={disorder?.current_stressors || 0}
               onChange={handleChange}
             >
-              <option value={0}>High</option>
-              <option value={1}>Moderate</option>
+              <option value={0}>Moderate</option>
+              <option value={1}>High</option>
               <option value={2}>Low</option>
             </select>
           </label>
@@ -183,8 +187,11 @@ export const DisorderPage = () => {
               value={disorder?.symptoms || 0}
               onChange={handleChange}
             >
-              <option value={0}>No Panic attacks</option>
+              <option value={0}>Shortness of breath</option>
               <option value={1}>Panic attacks</option>
+              <option value={2}>Chest pain</option>
+              <option value={3}>Dizziness</option>
+              <option value={4}>Fear of losing control</option>
             </select>
           </label>
           <label>
@@ -207,8 +214,8 @@ export const DisorderPage = () => {
               onChange={handleChange}
             >
               <option value={0}>Mild</option>
-              <option value={1}>Moderate</option>
-              <option value={2}>Severe</option>
+              <option value={1}>Significant</option>
+              <option value={2}>Moderate</option>
             </select>
           </label>
           <label>
@@ -229,8 +236,10 @@ export const DisorderPage = () => {
               value={disorder?.medical_history || 0}
               onChange={handleChange}
             >
-              <option value={0}>No</option>
-              <option value={1}>Yes</option>
+              <option value={0}>Diabetes</option>
+              <option value={1}>Asthma</option>
+              <option value={2}>None</option>
+              <option value={3}>Heart disease</option>
             </select>
           </label>
           <label>
@@ -240,9 +249,10 @@ export const DisorderPage = () => {
               value={disorder?.psychiatric_history || 0}
               onChange={handleChange}
             >
-              <option value={0}>None</option>
-              <option value={1}>Other</option>
+              <option value={0}>Bipolar disorder</option>
+              <option value={1}>Anxiety disorder</option>
               <option value={2}>Depressive disorder</option>
+              <option value={3}>None</option>
             </select>
           </label>
           <label>
@@ -252,8 +262,9 @@ export const DisorderPage = () => {
               value={disorder?.substance_use || 0}
               onChange={handleChange}
             >
-              <option value={0}>No Drugs</option>
+              <option value={0}>None</option>
               <option value={1}>Drugs</option>
+              <option value={2}>Alcohol</option>
             </select>
           </label>
           <label>
@@ -263,8 +274,10 @@ export const DisorderPage = () => {
               value={disorder?.coping_mechanisms || 0}
               onChange={handleChange}
             >
-              <option value={0}>Socializing</option>
-              <option value={1}>Other</option>
+              <option value={0}>Socializing </option>
+              <option value={1}>Exercise </option>
+              <option value={2}>Seeking therapy</option>
+              <option value={3}>Meditation </option>
             </select>
           </label>
           <label>
@@ -400,6 +413,11 @@ export const DisorderPage = () => {
               className={deleteButtonClassName}
               text="Delete"
               onClick={() => setConfirmDelete(true)}
+            />
+            <DefaultButton
+              className={cancelButtonClassName}
+              text="Cancel"
+              onClick={handleCancelEdit}
             />
           </div>
           <Dialog
