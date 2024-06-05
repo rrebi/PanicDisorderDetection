@@ -57,20 +57,20 @@ class PanicDisorderEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.Integer, nullable=False)  # 1 for Female, 0 for Male
-    family_history = db.Column(db.Integer, nullable=False)  # 1 for Yes, 0 for No
-    personal_history = db.Column(db.Integer, nullable=False)  # 1 for Yes, 0 for No
-    current_stressors = db.Column(db.Integer, nullable=False)  # 2 for Low, 1 for Moderate, 0 for High
-    symptoms = db.Column(db.Integer, nullable=False)  # 1 for Panic attacks, 0 for No Panic attacks
-    severity = db.Column(db.Integer, nullable=False)  # 2 for Severe, 1 for Moderate, 0 for Mild
-    impact_on_life = db.Column(db.Integer, nullable=False)  # 0 for Mild, 1 for Moderate, 2 for Severe
-    demographics = db.Column(db.Integer, nullable=False)  # 1 for Urban, 0 for Rural
-    medical_history = db.Column(db.Integer, nullable=False)  # 0 for No, 1 for Yes
-    psychiatric_history = db.Column(db.Integer, nullable=False)  # 2 for Depressive disorder, 1 for Other, 0 for None
-    substance_use = db.Column(db.Integer, nullable=False)  # 1 for Drugs, 0 for No Drugs
-    coping_mechanisms = db.Column(db.Integer, nullable=False)  # 0 for Socializing, 1 for Other
-    social_support = db.Column(db.Integer, nullable=False)  # 2 for Low, 1 for Moderate, 0 for High
-    lifestyle_factors = db.Column(db.Integer, nullable=False)  # 0 for Sleep quality, 1 for Exercise, 2 for Diet
+    gender = db.Column(db.Integer, nullable=False)
+    family_history = db.Column(db.Integer, nullable=False)
+    personal_history = db.Column(db.Integer, nullable=False)
+    current_stressors = db.Column(db.Integer, nullable=False)
+    symptoms = db.Column(db.Integer, nullable=False)
+    severity = db.Column(db.Integer, nullable=False)
+    impact_on_life = db.Column(db.Integer, nullable=False)
+    demographics = db.Column(db.Integer, nullable=False)
+    medical_history = db.Column(db.Integer, nullable=False)
+    psychiatric_history = db.Column(db.Integer, nullable=False)
+    substance_use = db.Column(db.Integer, nullable=False)
+    coping_mechanisms = db.Column(db.Integer, nullable=False)
+    social_support = db.Column(db.Integer, nullable=False)
+    lifestyle_factors = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<PanicDisorderEntry {self.id}>'

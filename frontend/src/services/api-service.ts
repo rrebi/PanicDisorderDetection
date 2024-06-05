@@ -3,8 +3,6 @@ import { Disorder } from '../models/disorder';
 import User from '../models/user';
 
 export const getDisorders = async (token: string): Promise<Disorder[]> => {
-  // axios call to get all disorders
-  // return the disorders
   const headers = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   };

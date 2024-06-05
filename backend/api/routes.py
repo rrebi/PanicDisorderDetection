@@ -287,7 +287,6 @@ class PanicDisorderEntryRoute(Resource):
 
 
 
-# Load the models
 try:
     with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\svm_model.pkl', 'rb') as svm_file:
         svm_model = pickle.load(svm_file)
@@ -309,7 +308,7 @@ except Exception as e:
     print(f"Error loading XGBoost model: {e}")
     xgboost_model = None
 
-# Define the column mapping
+
 column_mapping = {
     'id': 'Participant ID',
     'age': 'Age',
@@ -329,7 +328,7 @@ column_mapping = {
     'lifestyle_factors': 'Lifestyle Factors'
 }
 
-# Define the Predict endpoint
+
 @rest_api.route('/api/predict/<int:id>/<int:algorithm>')
 class Predict(Resource):
     @token_required

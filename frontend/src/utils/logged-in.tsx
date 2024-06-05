@@ -12,7 +12,7 @@ export const LoggedIn = (props: any) => {
       setIsAuthenticated(false);
     } else {
       setIsAuthenticated(true);
-      navigate("/disorders");
+      navigate("/user");
     }
   };
 
