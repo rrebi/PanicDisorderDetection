@@ -13,20 +13,9 @@ import {
   RegisiterInputStyle,
   registerColumnClassName,
   registerFormClassName,
-  optionContainerClassName,
-  choiceGroupClassName,
 } from "./login-register-style";
-import {
-  ActionButton,
-  ChoiceGroup,
-  DatePicker,
-  DefaultButton,
-  IChoiceGroupOption,
-  Label,
-  TextField,
-} from "@fluentui/react";
+import { ActionButton, DefaultButton, Label, TextField } from "@fluentui/react";
 import { loginUser, registerUser } from "../../services/auth-service";
-import { FONT_FAMILY } from "../../constants";
 import User from "../../models/user";
 import { useNavigate } from "react-router-dom";
 
@@ -93,7 +82,6 @@ export const LoginRegisterComponent = () => {
   );
 
   const validateRegisterInputs = () => {
-    // check if the inputs are empty and if they have the required length
     if (username.length < 3) {
       setUsernameError("Username must be at least 3 characters long!");
       return false;
@@ -161,17 +149,18 @@ export const LoginRegisterComponent = () => {
     <>
       {!isRegister ? (
         <div className={loginRegisterClassName}>
-          <img
-            src="/Pngtree-mental-health-problems_flat_illustration_6855451.png"
-            alt="Panic Help illustration"
-            className={loginIconClassName}
-          />
           <div className={loginFormClassName}>
-            <p className={loginRegisterFormClassName}>Welcome!</p>
+            <p className={loginRegisterFormClassName}>Welcome</p>
+            <img
+              src="./src/assets/logoheart.png"
+              alt="Panic Help illustration"
+              className={loginIconClassName}
+            />
             <div>
-              <Label htmlFor="usernameField" styles={LoginRegisterLabelStyle}>
-                Username
-              </Label>
+              <Label
+                htmlFor="usernameField"
+                styles={LoginRegisterLabelStyle}
+              ></Label>
               <TextField
                 id="usernameField"
                 name="email"
@@ -179,13 +168,15 @@ export const LoginRegisterComponent = () => {
                 value={username}
                 onChange={onChangeUsername}
                 required
+                placeholder="Username"
                 errorMessage={loginError}
               />
             </div>
             <div>
-              <Label htmlFor="paswordField" styles={LoginRegisterLabelStyle}>
-                Password
-              </Label>
+              <Label
+                htmlFor="paswordField"
+                styles={LoginRegisterLabelStyle}
+              ></Label>
               <TextField
                 id="paswordField"
                 type="password"
@@ -195,6 +186,7 @@ export const LoginRegisterComponent = () => {
                 value={password}
                 onChange={onChangePassword}
                 required
+                placeholder="Password"
                 errorMessage={loginError}
               />
             </div>
@@ -221,12 +213,14 @@ export const LoginRegisterComponent = () => {
       ) : (
         <div className={registerContainerClassName}>
           <p className={loginRegisterFormClassName}>Join our community</p>
+          <img
+            src="./src/assets/logoheart.png"
+            alt="Welcome to Therapease"
+            className={registerIconClassName}
+          />
           <div className={registerFormClassName}>
             <div className={registerColumnClassName}>
               <div>
-                <Label htmlFor="usernameField" styles={LoginRegisterLabelStyle}>
-                  Username
-                </Label>
                 <TextField
                   id="usernameField"
                   name="username"
@@ -234,13 +228,23 @@ export const LoginRegisterComponent = () => {
                   value={username}
                   onChange={onChangeUsername}
                   required
+                  placeholder="Username"
                   errorMessage={usernameError}
                 />
               </div>
               <div>
-                <Label htmlFor="passwordField" styles={LoginRegisterLabelStyle}>
-                  Password
-                </Label>
+                <TextField
+                  id="firstNameField"
+                  name="firstName"
+                  styles={RegisiterInputStyle}
+                  value={firstName}
+                  onChange={onChangeFirstName}
+                  placeholder="First Name"
+                  required
+                  errorMessage={firstNameError}
+                />
+              </div>
+              <div>
                 <TextField
                   id="passwordField"
                   type="password"
@@ -249,17 +253,12 @@ export const LoginRegisterComponent = () => {
                   styles={RegisiterInputStyle}
                   value={password}
                   onChange={onChangePassword}
+                  placeholder="Password"
                   required
                   errorMessage={passwordError}
                 />
               </div>
               <div>
-                <Label
-                  htmlFor="confirmPasswordField"
-                  styles={LoginRegisterLabelStyle}
-                >
-                  Confirm Password
-                </Label>
                 <TextField
                   id="confirmPasswordField"
                   type="password"
@@ -268,27 +267,9 @@ export const LoginRegisterComponent = () => {
                   styles={RegisiterInputStyle}
                   value={confirmPassword}
                   onChange={onChangeConfirmPassword}
+                  placeholder="Confirm Password"
                   required
                   errorMessage={confirmPasswordError}
-                />
-              </div>
-            </div>
-            <div className={registerColumnClassName}>
-              <div>
-                <Label
-                  htmlFor="firstNameField"
-                  styles={LoginRegisterLabelStyle}
-                >
-                  First Name
-                </Label>
-                <TextField
-                  id="firstNameField"
-                  name="firstName"
-                  styles={RegisiterInputStyle}
-                  value={firstName}
-                  onChange={onChangeFirstName}
-                  required
-                  errorMessage={firstNameError}
                 />
               </div>
             </div>
@@ -311,11 +292,6 @@ export const LoginRegisterComponent = () => {
               Login
             </ActionButton>
           </p>
-          <img
-            src="/33891894_2210_w048_n005_383b_p1_383-removebg-preview.png"
-            alt="Welcome to Therapease"
-            className={registerIconClassName}
-          />
         </div>
       )}
     </>

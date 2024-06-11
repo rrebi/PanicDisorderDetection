@@ -24,9 +24,6 @@ export const logoutUser = (): Promise<string> => {
 };
 
 export const loginUser = (username: string, password: string): Promise<LoginResponse> => {
-    // call to the API to login using axios
-    // if successful, redirect to the dashboard
-    // if not, display an error message
     return new Promise((resolve, reject) => {
       axios.post("http://127.0.0.1:5000/api/users/login", {
         username: username,

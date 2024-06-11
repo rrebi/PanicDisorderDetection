@@ -1,13 +1,23 @@
 import { IDialogStyles, ITextFieldStyles, mergeStyles } from "@fluentui/react";
-import {  BLACK_COLOR, BUTTON_COLOR, D_GREEN, FONT_FAMILY, LOGIN_REGISTER_COLOR, PEACH_COLOR, WHITE_COLOR } from "../../constants";
+import { D_PURPLE, FONT_FAMILY, WHITE_COLOR } from "../../constants";
+
+
+export const parenteditDisorderClassName = mergeStyles({
+    backgroundImage: "url(./src/assets/background.png)",
+    backgroundSize: "cover", 
+    backgroundPosition: "center", 
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "99.1vw",
+})
 
 export const viewDisorderClassName = mergeStyles({
-    backgroundColor: LOGIN_REGISTER_COLOR,
-    width: "85%",
+    width: "100%",
     height: "85%",
     margin: "auto",
     borderRadius: "25px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
     display: "flex",
     flexDirection: "column",
     verticalAlign: "middle",
@@ -16,13 +26,32 @@ export const viewDisorderClassName = mergeStyles({
     justifyContent: "space-evenly"
 });
 
+export const inputStyle = mergeStyles({
+    flex: 1,
+    padding: '2px 1',
+    fontSize: '16px',
+    border: 'none',
+    borderBottom: '2px solid #ccc',
+    background: 'transparent',
+    outline: 'none',
+    transition: 'border-color 0.3s',
+    selectors: {
+      ':focus': {
+        borderBottom: '2px solid #563C5C',
+      },
+    },
+    color:D_PURPLE
+    
+  });
+
+
+
 export const editDisorderClassName = mergeStyles({
-    backgroundColor: LOGIN_REGISTER_COLOR,
-    width: "85%",
-    height: "85%",
+    width: "100%",
+    height: "44vw",
     margin: "auto",
+    alignItems: "center",
     borderRadius: "25px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
     display: "flex",
     flexDirection: "column",
     minHeight: "500px",
@@ -32,31 +61,33 @@ export const editDisorderClassName = mergeStyles({
 export const buttonsClassName = mergeStyles({
     display: "flex",
     flexDirection: "row",
+    marginBottom: "15px",
     justifyContent: "space-evenly",
-    width: "50%"
+    width: "30%"
 });
 
 export const editButtonsClassName = mergeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: "75%",
+    width: "25%",
     alignSelf: "center"
 });
 
 export const editButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: BUTTON_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
-    fontFamily: FONT_FAMILY
+    fontFamily: FONT_FAMILY,
+    color: WHITE_COLOR,
 });
 
 export const saveButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: BUTTON_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
@@ -68,9 +99,9 @@ export const deleteButtonClassName = mergeStyles({
     height: "50px",
     backgroundColor: WHITE_COLOR,
     borderRadius: "25px",
-    border: "none",
+    border: "1px solid " + D_PURPLE,
     fontFamily: FONT_FAMILY,
-    color: D_GREEN
+    color: D_PURPLE
 });
 
 export const cancelButtonClassName = mergeStyles({
@@ -78,8 +109,9 @@ export const cancelButtonClassName = mergeStyles({
     height: "50px",
     backgroundColor: WHITE_COLOR,
     borderRadius: "25px",
-    border: "none",
-    fontFamily: FONT_FAMILY
+    border: "1px solid " + D_PURPLE,
+    fontFamily: FONT_FAMILY,
+    color: D_PURPLE
 });
 
 export const editEntryInputStyle: Partial<ITextFieldStyles> = {
@@ -142,7 +174,7 @@ export const cofirmationStyle: Partial<IDialogStyles> = {
 };
 
 export const confirmationDeleteButtonClassName = mergeStyles({
-    backgroundColor: PEACH_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
@@ -152,7 +184,7 @@ export const confirmationDeleteButtonClassName = mergeStyles({
 export const confirmationCancelButtonClassName = mergeStyles({
     backgroundColor: WHITE_COLOR,
     borderRadius: "25px",
-    border: "1px solid " + PEACH_COLOR,
+    border: "1px solid " + D_PURPLE,
     fontFamily: FONT_FAMILY,
-    color: PEACH_COLOR
+    color: D_PURPLE
 });

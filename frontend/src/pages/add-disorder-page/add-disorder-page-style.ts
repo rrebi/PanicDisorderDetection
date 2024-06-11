@@ -1,31 +1,65 @@
 import { ITextFieldStyles, mergeStyles } from "@fluentui/react";
-import { BUTTON_COLOR, FONT_FAMILY, LOGIN_REGISTER_COLOR, WHITE_COLOR } from "../../constants";
-
-export {};
+import {  FONT_FAMILY, D_PURPLE, LL_PURPLE, WHITE_COLOR } from "../../constants";
+export { };
 
 export const addDisorderClassName = mergeStyles({
-    backgroundColor: LOGIN_REGISTER_COLOR,
-    width: "85%",
-    height: "85%",
+    backgroundColor: LL_PURPLE,
+    backgroundImage: "url(./src/assets/background.png)",
+    backgroundSize: "cover", 
+    backgroundPosition: "center", 
+    width: "100%",
+    height: "44vw",
     margin: "auto",
-    borderRadius: "25px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
+    borderRadius: "10px",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     minHeight: "500px",
     justifyContent: "space-evenly",
 });
+
+export const parenteditDisorderClassName = mergeStyles({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100vw",
+})
+
+export const inputcontainer = mergeStyles({
+ position: "relative",
+ margin: "5px 0",
+ fontFamily: "arial",
+})
+
+export const inputStyle = mergeStyles({
+    flex: 1,
+    padding: '2px 1',
+    fontSize: '16px',
+    border: 'none',
+    borderBottom: '2px solid #ccc',
+    background: 'transparent',
+    outline: 'none',
+    transition: 'border-color 0.3s',
+    selectors: {
+      ':focus': {
+        borderBottom: '2px solid #563C5C', // Change to your preferred color
+      },
+    },
+    color: D_PURPLE
+  });
 
 export const addDisorderTitleClassName = mergeStyles({
     alignSelf: "center",
 });
 
 export const buttonsClassName = mergeStyles({
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "75%",
-    alignSelf: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '20%',
+    alignSelf: 'center',
+    marginTop: "5px"
 });
 
 export const addTitleInputStyle: Partial<ITextFieldStyles> = {
@@ -33,7 +67,7 @@ export const addTitleInputStyle: Partial<ITextFieldStyles> = {
         borderRadius: "25px",
         border: "none",
         boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-        minHeight:"25px",
+        minHeight: "25px",
         margin: "1vh 0 1vh 0",
         selectors: {
             ".ms-TextField-fieldGroup": {
@@ -53,7 +87,7 @@ export const addTitleInputStyle: Partial<ITextFieldStyles> = {
         }
     },
     wrapper: {
-        width:"50%"
+        width: "50%"
     }
 };
 
@@ -70,7 +104,7 @@ export const addInputClassName = mergeStyles({
 export const saveButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: BUTTON_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
@@ -82,6 +116,7 @@ export const cancelButtonClassName = mergeStyles({
     height: "50px",
     backgroundColor: WHITE_COLOR,
     borderRadius: "25px",
-    border: "none",
+    border: "1px solid " + D_PURPLE,
+    color: D_PURPLE,
     fontFamily: FONT_FAMILY
 });

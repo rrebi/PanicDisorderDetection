@@ -1,5 +1,3 @@
-// page for when a patient logs in
-
 import {
   DefaultButton,
   DocumentCard,
@@ -19,6 +17,7 @@ import {
   disorderCardDetailsTextClassName,
   disorderCardTitleClassName,
   disorderDivClassName,
+  ClassMoveButtons,
   userDashboardMainDivClassName,
 } from "./user-dashboard-style";
 
@@ -67,12 +66,12 @@ export const UserDashboard = () => {
     >
       <DocumentCardTitle
         className={disorderCardTitleClassName}
-        title={disorder.age.toString()}
+        title={`ID: ${disorder.id?.toString()}`}
       />
       <DocumentCardDetails className={disorderCardDetailsClassName}>
         <DocumentCardActivity
           className={disorderCardDetailsTextClassName}
-          activity={disorder.gender.toString()}
+          activity={disorder.age.toString()}
           people={people}
         />
       </DocumentCardDetails>
@@ -81,13 +80,15 @@ export const UserDashboard = () => {
 
   return (
     <div className={userDashboardMainDivClassName}>
-      <h2>Disorders</h2>
-      <DefaultButton
-        className={addDisorderButtonClassName}
-        iconProps={{ iconName: "Add" }}
-        text="New Disorder"
-        onClick={() => navigate("/user/add-disorder")}
-      />
+      <div className={ClassMoveButtons}>
+        <h2>Disorders</h2>
+        <DefaultButton
+          className={addDisorderButtonClassName}
+          iconProps={{ iconName: "Add" }}
+          text="New Disorder"
+          onClick={() => navigate("/user/add-disorder")}
+        />
+      </div>
       <br />
       <div className={disorderDivClassName}>{disorderCards}</div>
     </div>

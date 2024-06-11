@@ -1,67 +1,66 @@
 import { ITextFieldStyles, mergeStyles } from "@fluentui/react";
-import { FONT_FAMILY, LOGIN_REGISTER_COLOR, PEACH_COLOR, WHITE_COLOR } from "../../constants";
+import { BLACK_COLOR, D_PURPLE, FONT_FAMILY, LL_PURPLE, L_PURPLE, WHITE_COLOR } from "../../constants";
 
 export const mainDivClassName = mergeStyles({
-    width: "100%",
-    height: "100%",
+    width: "99.1vw",
+    height: "45vw",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: WHITE_COLOR,
+    backgroundColor: LL_PURPLE,
 });
 
 export const detailsAndPasswordDivClassName = mergeStyles({
-    width: "95%",
+    width: "45%",
     display: "flex",
-    backgroundColor: LOGIN_REGISTER_COLOR,
+    backgroundColor: LL_PURPLE,
     flexDirection: "row",
     justifyContent: "space-around",
     borderRadius: "10px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
+    boxShadow: "0px 0px 7px 1px rgba(0,0,0,0.1)",
     overflowY: "auto",
     marginBottom: "5vh"
 });
 
 export const headerClassName = mergeStyles({
-    margin: "5px"
+    margin: "5px",
+    color: D_PURPLE
 });
 
 export const profileInputStyle: Partial<ITextFieldStyles> = {
     fieldGroup: {
-        borderRadius: "25px",
+        borderRadius: "0", 
         border: "none",
-        boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-        margin: "1vh 0 1vh 0",
+        borderBottom: "2px solid #8B8589", 
+        width: "13vw",
+        height: "auto", 
+        margin: "2vh 0",
+        backgroundColor: "transparent", 
+        transition: "border-color 0.3s ease", 
         selectors: {
-            ".ms-TextField-fieldGroup": {
-                border: "none",
+            ":hover": {
+                borderBottomColor: D_PURPLE, 
+            },
+            ":focus-within": {
+                borderBottomColor: D_PURPLE, 
             },
         },
     },
-    root: {
-        width: "100%",
+    field: {
+        backgroundColor: 'transparent',
+        color: BLACK_COLOR,
         selectors: {
-            ".ms-Label": {
-                fontFamily: FONT_FAMILY,
-            },
-            ".ms-TextField-field": {
-                fontFamily: FONT_FAMILY,
-            },
-            "input:disabled": {
-                borderRadius: "25px",
-            },
-            ".ms-TextField-fieldGroup": {
-                borderRadius: "25px",
-                border: "none",
-                boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-            }
-        }
-    }
+          ':disabled': {
+            backgroundColor: '#transparent', // Change the background color when disabled
+            color: L_PURPLE, // Change the text color when disabled
+          },
+        },
+    },
 };
 
 export const detailsDivClassName = mergeStyles({
-    width: "45%",
+    width: "40%",
     display: "flex",
     flexDirection: "column",
 });
@@ -75,7 +74,7 @@ export const passwordDivClassName = mergeStyles({
 export const saveButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: PEACH_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
@@ -87,9 +86,9 @@ export const cancelButtonClassName = mergeStyles({
     height: "50px",
     backgroundColor: WHITE_COLOR,
     borderRadius: "25px",
-    border: "1px solid " + PEACH_COLOR,
+    border: "1px solid " + D_PURPLE,
     fontFamily: FONT_FAMILY,
-    color: PEACH_COLOR
+    color: D_PURPLE,
 });
 
 export const buttonsClassName = mergeStyles({
@@ -100,7 +99,7 @@ export const buttonsClassName = mergeStyles({
 export const editButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: PEACH_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,
@@ -112,7 +111,7 @@ export const editButtonClassName = mergeStyles({
 export const savePasswordButtonClassName = mergeStyles({
     width: "200px",
     height: "50px",
-    backgroundColor: PEACH_COLOR,
+    backgroundColor: D_PURPLE,
     borderRadius: "25px",
     border: "none",
     fontFamily: FONT_FAMILY,

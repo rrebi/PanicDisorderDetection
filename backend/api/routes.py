@@ -9,6 +9,7 @@ from flask_restx import Api, fields, Resource
 
 from api.config import Config
 from api.models import User, JWTTokenBlocklist, db, PanicDisorderEntry
+from modelsAI.preprocess import preprocess_and_predict
 
 rest_api = Api(version='1.0', title='PanicHelp')
 
@@ -31,40 +32,40 @@ update_user_model = rest_api.model('UpdateUserModel', {
 post_panic_disorder_entry_model = rest_api.model('PostPanicDisorderEntryModel', {
     'user_id': fields.Integer(required=True),
     'age': fields.Integer(required=True),
-    'gender': fields.Integer(required=True, description='1 for Female, 0 for Male'),
-    'family_history': fields.Integer(required=True, description='1 for Yes, 0 for No'),
-    'personal_history': fields.Integer(required=True, description='1 for Yes, 0 for No'),
-    'current_stressors': fields.Integer(required=True, description='2 for Low, 1 for Moderate, 0 for High'),
-    'symptoms': fields.Integer(required=True, description='1 for Panic attacks, 0 for No Panic attacks'),
-    'severity': fields.Integer(required=True, description='2 for Severe, 1 for Moderate, 0 for Mild'),
-    'impact_on_life': fields.Integer(required=True, description='0 for Mild, 1 for Moderate, 2 for Severe'),
-    'demographics': fields.Integer(required=True, description='1 for Urban, 0 for Rural'),
-    'medical_history': fields.Integer(required=True, description='0 for No, 1 for Yes'),
-    'psychiatric_history': fields.Integer(required=True, description='2 for Depressive disorder, 1 for Other, 0 for None'),
-    'substance_use': fields.Integer(required=True, description='1 for Drugs, 0 for No Drugs'),
-    'coping_mechanisms': fields.Integer(required=True, description='0 for Socializing, 1 for Other'),
-    'social_support': fields.Integer(required=True, description='2 for Low, 1 for Moderate, 0 for High'),
-    'lifestyle_factors': fields.Integer(required=True, description='0 for Sleep quality, 1 for Exercise, 2 for Diet')
+    'gender':fields.String(required=True, min_length=0, max_length=64),
+    'family_history': fields.String(required=True, min_length=0, max_length=64),
+    'personal_history': fields.String(required=True, min_length=0, max_length=64),
+    'current_stressors': fields.String(required=True, min_length=0, max_length=64),
+    'symptoms': fields.String(required=True, min_length=0, max_length=64),
+    'severity': fields.String(required=True, min_length=0, max_length=64),
+    'impact_on_life': fields.String(required=True, min_length=0, max_length=64),
+    'demographics': fields.String(required=True, min_length=0, max_length=64),
+    'medical_history': fields.String(required=True, min_length=0, max_length=64),
+    'psychiatric_history': fields.String(required=True, min_length=0, max_length=64),
+    'substance_use': fields.String(required=True, min_length=0, max_length=64),
+    'coping_mechanisms': fields.String(required=True, min_length=0, max_length=64),
+    'social_support': fields.String(required=True, min_length=0, max_length=64),
+    'lifestyle_factors': fields.String(required=True, min_length=0, max_length=64)
 })
 
 update_panic_disorder_entry_model = rest_api.model('UpdatePanicDisorderEntryModel', {
     'id': fields.Integer(required=True),
     'user_id': fields.Integer(required=False),
     'age': fields.Integer(required=False),
-    'gender': fields.Integer(required=False, description='1 for Female, 0 for Male'),
-    'family_history': fields.Integer(required=False, description='1 for Yes, 0 for No'),
-    'personal_history': fields.Integer(required=False, description='1 for Yes, 0 for No'),
-    'current_stressors': fields.Integer(required=False, description='2 for Low, 1 for Moderate, 0 for High'),
-    'symptoms': fields.Integer(required=False, description='1 for Panic attacks, 0 for No Panic attacks'),
-    'severity': fields.Integer(required=False, description='2 for Severe, 1 for Moderate, 0 for Mild'),
-    'impact_on_life': fields.Integer(required=False, description='0 for Mild, 1 for Moderate, 2 for Severe'),
-    'demographics': fields.Integer(required=False, description='1 for Urban, 0 for Rural'),
-    'medical_history': fields.Integer(required=False, description='0 for No, 1 for Yes'),
-    'psychiatric_history': fields.Integer(required=False, description='2 for Depressive disorder, 1 for Other, 0 for None'),
-    'substance_use': fields.Integer(required=False, description='1 for Drugs, 0 for No Drugs'),
-    'coping_mechanisms': fields.Integer(required=False, description='0 for Socializing, 1 for Other'),
-    'social_support': fields.Integer(required=False, description='2 for Low, 1 for Moderate, 0 for High'),
-    'lifestyle_factors': fields.Integer(required=False, description='0 for Sleep quality, 1 for Exercise, 2 for Diet')
+    'gender':fields.String(required=False, min_length=0, max_length=64),
+    'family_history': fields.String(required=False, min_length=0, max_length=64),
+    'personal_history': fields.String(required=False, min_length=0, max_length=64),
+    'current_stressors': fields.String(required=False, min_length=0, max_length=64),
+    'symptoms': fields.String(required=False, min_length=0, max_length=64),
+    'severity': fields.String(required=False, min_length=0, max_length=64),
+    'impact_on_life': fields.String(required=False, min_length=0, max_length=64),
+    'demographics': fields.String(required=False, min_length=0, max_length=64),
+    'medical_history': fields.String(required=False, min_length=0, max_length=64),
+    'psychiatric_history': fields.String(required=False, min_length=0, max_length=64),
+    'substance_use': fields.String(required=False, min_length=0, max_length=64),
+    'coping_mechanisms': fields.String(required=False, min_length=0, max_length=64),
+    'social_support': fields.String(required=False, min_length=0, max_length=64),
+    'lifestyle_factors': fields.String(required=False, min_length=0, max_length=64)
 })
 
 def token_required(f):
@@ -81,7 +82,7 @@ def token_required(f):
         try:
             data = jwt.decode(token, Config.SECRET_KEY, algorithms=['HS256'])
             current_user = User.find_by_username(data['username'])
-            print(f"Decoded User: {current_user}")  # Debugging line
+            print(f"Decoded User: {current_user}")
             if not current_user:
                 return {'success': False, 'msg': 'Invalid user'}, 400
             token_expired = db.session.query(JWTTokenBlocklist.id).filter_by(jwt_token=token).scalar()
@@ -92,7 +93,7 @@ def token_required(f):
         except Exception as e:
             print(f"Exception: {e}")  # Debugging line
             return {"success": False, "msg": "Invalid JWT Token"}, 400
-        print(f"current_user type: {type(current_user)}")  # Debugging line
+        print(f"current_user type: {type(current_user)}")
         return f(self, current_user, *args, **kwargs)
     return decorator
 
@@ -140,8 +141,8 @@ class Logout(Resource):
     @token_required
     def post(self, current_user):
         try:
-            print(f"Logout current_user type: {type(current_user)}")  # Debugging line
-            print(f"Logout current_user: {current_user.find_by_username}")  # Debugging line
+            print(f"Logout current_user type: {type(current_user)}")
+            print(f"Logout current_user: {current_user.find_by_username}")
 
             token = request.headers['Authorization'].split(' ')[1]
             print(f"Token logout:{token}")
@@ -159,7 +160,7 @@ class Logout(Resource):
 
             return {'success': True, 'msg': 'User logged out successfully'}, 200
         except Exception as e:
-            print(f"Logout Exception: {e}")  # Debugging line
+            print(f"Logout Exception: {e}")
             return {'success': False, 'msg': str(e)}, 500
 
 
@@ -178,6 +179,8 @@ class Users(Resource):
         current_user.first_name = _first_name
         current_user.username = _username
         current_user.save()
+
+
         return {'success': True, 'msg': 'User updated successfully'}, 200
 
 @rest_api.route('/api/users/account/password')
@@ -228,7 +231,7 @@ class PanicDisorder(Resource):
             new_entry.save()
             return {'success': True, 'msg': 'Panic disorder entry created successfully'}, 201
         except Exception as e:
-            print("Error:", e)  # Debugging line
+            print("Error:", e)
 
 @rest_api.route('/api/disorder/<int:id>')
 class PanicDisorderEntryRoute(Resource):
@@ -285,50 +288,6 @@ class PanicDisorderEntryRoute(Resource):
         return {'success': True, 'msg': 'Panic disorder entry deleted successfully'}, 200
 
 
-
-
-try:
-    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\svm_model.pkl', 'rb') as svm_file:
-        svm_model = pickle.load(svm_file)
-except Exception as e:
-    print(f"Error loading SVM model: {e}")
-    svm_model = None
-
-try:
-    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\dtc_model.pkl', 'rb') as tree_file:
-        tree_model = pickle.load(tree_file)
-except Exception as e:
-    print(f"Error loading Decision Tree model: {e}")
-    tree_model = None
-
-try:
-    with open('C:\\Users\\rebec\\Desktop\\PanicDisorderDetection\\backend\\modelsAI\\model.pkl', 'rb') as xgboost_file:
-        xgboost_model = pickle.load(xgboost_file)
-except Exception as e:
-    print(f"Error loading XGBoost model: {e}")
-    xgboost_model = None
-
-
-column_mapping = {
-    'id': 'Participant ID',
-    'age': 'Age',
-    'gender': 'Gender',
-    'family_history': 'Family History',
-    'personal_history': 'Personal History',
-    'current_stressors': 'Current Stressors',
-    'symptoms': 'Symptoms',
-    'severity': 'Severity',
-    'impact_on_life': 'Impact on Life',
-    'demographics': 'Demographics',
-    'medical_history': 'Medical History',
-    'psychiatric_history': 'Psychiatric History',
-    'substance_use': 'Substance Use',
-    'coping_mechanisms': 'Coping Mechanisms',
-    'social_support': 'Social Support',
-    'lifestyle_factors': 'Lifestyle Factors'
-}
-
-
 @rest_api.route('/api/predict/<int:id>/<int:algorithm>')
 class Predict(Resource):
     @token_required
@@ -341,38 +300,13 @@ class Predict(Resource):
                 return {'success': False, 'msg': 'Entry does not belong to this user'}, 400
 
             data = entry.to_json()
-            df = pd.DataFrame([data])
+            prediction_label = preprocess_and_predict(data, algorithm)
 
-            # Drop non-feature columns
-            df.drop(columns=['user_id'], inplace=True)
-
-            # Rename columns
-            df.rename(columns=column_mapping, inplace=True)
-
-            print(f"Data for prediction: {df}")  # Debugging line
-
-            prediction = None
-            if algorithm == 0:
-                if svm_model is not None:
-                    prediction = svm_model.predict(df)
-                else:
-                    return {'success': False, 'msg': 'SVM model not loaded'}, 500
-            elif algorithm == 1:
-                if tree_model is not None:
-                    prediction = tree_model.predict(df)
-                else:
-                    return {'success': False, 'msg': 'Tree model not loaded'}, 500
-            elif algorithm == 2:
-                if xgboost_model is not None:
-                    prediction = xgboost_model.predict(df)
-                else:
-                    return {'success': False, 'msg': 'XGBoost model not loaded'}, 500
-            else:
-                print(f"Invalid algorithm specified: {algorithm}")  # Debugging line
-                return {'success': False, 'msg': 'Invalid algorithm specified'}, 400
-
-            prediction_label = 'No Panic Disorder' if prediction[0] == 0 else 'Possible Panic Disorder'
             return {'success': True, 'prediction': prediction_label}, 200
+        except ValueError as e:
+            print(f"Prediction Error: {e}")
+            return {'success': False, 'msg': str(e)}, 400
+
         except Exception as e:
-            print(f"Prediction Exception: {e}")  # Debugging line
+            print(f"Prediction Exception: {e}")
             return {'success': False, 'msg': str(e)}, 500

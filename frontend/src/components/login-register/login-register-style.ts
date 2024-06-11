@@ -1,40 +1,45 @@
 import { ILabelStyles, ITextFieldStyles, mergeStyles } from "@fluentui/react";
-import { BUTTON_COLOR, FONT_FAMILY, LOGIN_REGISTER_COLOR, WHITE_COLOR } from "../../constants";
+import { D_PURPLE, FONT_FAMILY, LL_PURPLE, WHITE_COLOR } from "../../constants";
 
 export const loginRegisterClassName = mergeStyles({
-    backgroundColor: LOGIN_REGISTER_COLOR,
-    width: "75%",
+    backgroundColor: LL_PURPLE,
+    backgroundImage: "url(./src/assets/background.png)",
+    backgroundSize: "cover", 
+    backgroundPosition: "center", 
+    width: "auto",
     height: "75%",
     margin: "auto",
-    borderRadius: "25px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
     display: "flex",
-    flexDirection: "row",
-    verticalAlign: "middle",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     minHeight: "500px",
 });
 
 export const registerContainerClassName = mergeStyles({
-    backgroundColor: LOGIN_REGISTER_COLOR,
-    width: "75%",
+    backgroundColor: LL_PURPLE,
+    backgroundImage: "url(./src/assets/background.png)",
+    backgroundSize: "cover", 
+    backgroundPosition: "center", 
+    width: "100%",
     height: "75%",
     margin: "auto",
-    borderRadius: "25px",
-    boxShadow: "0px 0px 10px 1px rgba(0,0,0,0.25)",
     display: "flex",
     flexDirection: "column",
-    verticalAlign: "middle",
+    justifyContent: "center",
     alignItems: "center",
+    padding: "2%",
     minHeight: "500px",
 });
 
 export const loginIconClassName = mergeStyles({
-    width: "50%"
+    width: "10%",  // Adjusted size
+    marginBottom: "10px",  // Added margin for spacing
 });
 
 export const registerIconClassName = mergeStyles({
-    width: "40%"
+    width: "5%",
+    backgroundColor: "rgba(0, 0, 0, 0)",
 });
 
 export const loginFormClassName = mergeStyles({
@@ -46,13 +51,17 @@ export const loginFormClassName = mergeStyles({
 
 export const registerFormClassName = mergeStyles({
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-evenly",
-    alignItems: "center",
+    alignItems: "flex-start",
 });
 
 export const loginRegisterFormClassName = mergeStyles({
-    fontSize: "1.3em",
+    fontFamily: FONT_FAMILY,
+    fontSize: "1.4em",
+    fontWeight: "bold", 
+    letterSpacing: "0.5px",
+    marginBottom: "3px"
 });
 
 export const LoginRegisterLabelStyle: Partial<ILabelStyles> = {
@@ -63,16 +72,20 @@ export const LoginRegisterLabelStyle: Partial<ILabelStyles> = {
 
 export const LoginInputStyle: Partial<ITextFieldStyles> = {
     fieldGroup: {
-        borderRadius: "25px",
+        borderRadius: "0", 
         border: "none",
-        boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-        width: "20vw",
-        height: "5vh",
-        minHeight:"30px",
-        margin: "2vh 0 2vh 0",
+        borderBottom: "2px solid #8B8589", 
+        width: "13vw",
+        height: "auto", 
+        margin: "2vh 0",
+        backgroundColor: "transparent", 
+        transition: "border-color 0.3s ease", 
         selectors: {
-            ".ms-TextField-fieldGroup": {
-                border: "none",
+            ":hover": {
+                borderBottomColor: D_PURPLE, 
+            },
+            ":focus-within": {
+                borderBottomColor: D_PURPLE, 
             }
         }
     },
@@ -80,23 +93,34 @@ export const LoginInputStyle: Partial<ITextFieldStyles> = {
         selectors: {
             ".ms-TextField-field": {
                 fontFamily: FONT_FAMILY,
+                fontSize: "1.1em",
+                padding: "10px 0", 
+                color: "#333", 
+                backgroundColor: "transparent", 
+                border: "none", 
+                outline: "none", 
             }
         }
     }
 };
 
+
 export const RegisiterInputStyle: Partial<ITextFieldStyles> = {
     fieldGroup: {
-        borderRadius: "25px",
+        borderRadius: "0", 
         border: "none",
-        boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-        width: "15vw",
-        height: "4vh",
-        minHeight:"25px",
-        margin: "1vh 0 1vh 0",
+        borderBottom: "2px solid #8B8589", 
+        width: "13vw",
+        height: "auto", 
+        margin: "2vh 0",
+        backgroundColor: "transparent", 
+        transition: "border-color 0.3s ease", 
         selectors: {
-            ".ms-TextField-fieldGroup": {
-                border: "none",
+            ":hover": {
+                borderBottomColor: "#563C5C", 
+            },
+            ":focus-within": {
+                borderBottomColor: "#563C5C", 
             }
         }
     },
@@ -104,6 +128,12 @@ export const RegisiterInputStyle: Partial<ITextFieldStyles> = {
         selectors: {
             ".ms-TextField-field": {
                 fontFamily: FONT_FAMILY,
+                fontSize: "1.1em",
+                padding: "10px 0", 
+                color: "#333", 
+                backgroundColor: "transparent", 
+                border: "none", 
+                outline: "none", 
             }
         }
     }
@@ -117,7 +147,7 @@ export const loginRegisterButtonClassName = mergeStyles({
     borderRadius: "25px",
     border: "none",
     boxShadow: "0px 0px 5px 1px rgba(0,0,0,0.15)",
-    backgroundColor: BUTTON_COLOR,
+    backgroundColor: "#8B8589",
     color: WHITE_COLOR 
 });
 
@@ -127,10 +157,14 @@ export const signUpActionButtonClassName = mergeStyles({
 });
 
 export const registerColumnClassName = mergeStyles({
-    display: "flex",
-    flexDirection: "column",
-    marginRight: "2vw",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '1vw', // Adds space between the buttons
+    marginTop: '2vh', // Adds space above the buttons
 });
+
 
 export const choiceGroupClassName = mergeStyles({
     fontFamily: FONT_FAMILY,

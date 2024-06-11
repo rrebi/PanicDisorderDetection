@@ -2,8 +2,9 @@ import { mergeStyles } from "@fluentui/react";
 import { BACKGROUND_COLOR } from "../../constants";
 
 export const logoStyle = mergeStyles({
-    width: "15em",
-    margin: "1.25em"
+    width: "12em",
+    marginLeft: "2em",
+    marginTop: "0.5em"
 });
 
 export const pageStyle = mergeStyles({

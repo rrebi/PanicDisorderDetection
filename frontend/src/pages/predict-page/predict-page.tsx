@@ -11,6 +11,9 @@ import { getDisorders, predict } from "../../services/api-service";
 import {
   predictPageClassName,
   predictButtonClassName,
+  predictPageClassNameSecond,
+  helpStepItemClassName,
+  GetHelpButtonClassName,
 } from "./predict-page-style";
 
 export const PredictPage: React.FC = () => {
@@ -72,32 +75,49 @@ export const PredictPage: React.FC = () => {
   const dropdownStyles: Partial<IDropdownStyles> = { dropdown: { width: 300 } };
 
   return (
-    <div className={predictPageClassName}>
-      <h1>Predict Panic Disorder</h1>
-      <Dropdown
-        label="Select Algorithm"
-        selectedKey={selectedAlgorithm}
-        onChange={(event, option) =>
-          setSelectedAlgorithm(option?.key as number)
-        }
-        placeholder="Select an algorithm"
-        options={algorithmOptions}
-        styles={dropdownStyles}
-      />
-      <Dropdown
-        label="Select Disorder"
-        selectedKey={selectedDisorder}
-        onChange={(event, option) => setSelectedDisorder(option?.key as number)}
-        placeholder="Select a disorder"
-        options={disorderOptions}
-        styles={dropdownStyles}
-      />
-      <DefaultButton
-        className={predictButtonClassName}
-        text="Predict"
-        onClick={handlePredict}
-      />
-      {prediction && <div>Prediction: {prediction}</div>}
+    <div className={predictPageClassNameSecond}>
+      <div className={predictPageClassName}>
+        <h2 style={{ fontSize: "50px" }}>Predict Panic Disorder</h2>
+        <Dropdown
+          label="Select Algorithm"
+          selectedKey={selectedAlgorithm}
+          onChange={(event, option) =>
+            setSelectedAlgorithm(option?.key as number)
+          }
+          placeholder="Select an algorithm"
+          options={algorithmOptions}
+          styles={dropdownStyles}
+        />
+        <Dropdown
+          label="Select Disorder"
+          selectedKey={selectedDisorder}
+          onChange={(event, option) =>
+            setSelectedDisorder(option?.key as number)
+          }
+          placeholder="Select a disorder"
+          options={disorderOptions}
+          styles={dropdownStyles}
+        />
+        <DefaultButton
+          className={predictButtonClassName}
+          text="Predict"
+          onClick={handlePredict}
+        />
+
+        {/*Asta e *1 */}
+        {prediction && (
+          <div className={helpStepItemClassName}>
+            <div>Prediction: {prediction}</div>
+            {prediction === "Possible Panic Disorder" && (
+              <DefaultButton
+                className={GetHelpButtonClassName}
+                text="Get Help"
+                onClick={() => navigate("/disorder-help")}
+              />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

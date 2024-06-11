@@ -155,7 +155,7 @@ export const UserPage = () => {
             label="Username"
             value={updatedUser?.username}
             onChange={handleUsernameChange}
-            disabled={!editMode}
+            disabled={true}
             styles={profileInputStyle}
           />
           <TextField
@@ -199,6 +199,8 @@ export const UserPage = () => {
             type="password"
             value={currentPassword}
             onChange={handleCurrentPasswordChange}
+            canRevealPassword
+            revealPasswordAriaLabel="Show password"
             styles={profileInputStyle}
           />
           <TextField
@@ -209,7 +211,7 @@ export const UserPage = () => {
             styles={profileInputStyle}
           />
           <TextField
-            label="Confirm Password"
+            label="Confirm New Password"
             type="password"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}

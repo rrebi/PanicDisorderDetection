@@ -23,7 +23,8 @@ import {
   saveButtonClassName,
   viewDisorderClassName,
   confirmationsClassName,
-  cofirmationStyle,
+  inputStyle,
+  parenteditDisorderClassName,
   confirmationDeleteButtonClassName,
   confirmationCancelButtonClassName,
 } from "./disorder-page-style";
@@ -85,14 +86,13 @@ export const DisorderPage = () => {
 
     if (type === "number") {
       val = parseInt(value, 10);
-    } else if (!isNaN(Number(value))) {
-      val = parseInt(value, 10);
-    }
 
-    setDisorder((prevDisorder) => ({
-      ...prevDisorder!,
-      [name]: val,
-    }));
+      console.log(`Updating formData.${name} to:`, val);
+      setDisorder((prevDisorder) => ({
+        ...prevDisorder!,
+        [name]: val,
+      }));
+    }
   };
 
   useEffect(() => {
@@ -125,323 +125,309 @@ export const DisorderPage = () => {
   return (
     <div>
       {editing ? (
-        <div className={editDisorderClassName}>
-          <label>
-            Age:
-            <input
-              type="number"
-              name="age"
-              value={disorder?.age || ""}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Gender:
-            <select
-              name="gender"
-              value={disorder?.gender || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Male</option>
-              <option value={1}>Female</option>
-            </select>
-          </label>
-          <label>
-            Family History:
-            <select
-              name="family_history"
-              value={disorder?.family_history || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>No</option>
-              <option value={1}>Yes</option>
-            </select>
-          </label>
-          <label>
-            Personal History:
-            <select
-              name="personal_history"
-              value={disorder?.personal_history || 0}
-              onChange={handleChange}
-            >
-              <option value={1}>No</option>
-              <option value={0}>Yes</option>
-            </select>
-          </label>
-          <label>
-            Current Stressors:
-            <select
-              name="current_stressors"
-              value={disorder?.current_stressors || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Moderate</option>
-              <option value={1}>High</option>
-              <option value={2}>Low</option>
-            </select>
-          </label>
-          <label>
-            Symptoms:
-            <select
-              name="symptoms"
-              value={disorder?.symptoms || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Shortness of breath</option>
-              <option value={1}>Panic attacks</option>
-              <option value={2}>Chest pain</option>
-              <option value={3}>Dizziness</option>
-              <option value={4}>Fear of losing control</option>
-            </select>
-          </label>
-          <label>
-            Severity:
-            <select
-              name="severity"
-              value={disorder?.severity || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Mild</option>
-              <option value={1}>Moderate</option>
-              <option value={2}>Severe</option>
-            </select>
-          </label>
-          <label>
-            Impact on Life:
-            <select
-              name="impact_on_life"
-              value={disorder?.impact_on_life || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Mild</option>
-              <option value={1}>Significant</option>
-              <option value={2}>Moderate</option>
-            </select>
-          </label>
-          <label>
-            Demographics:
-            <select
-              name="demographics"
-              value={disorder?.demographics || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Rural</option>
-              <option value={1}>Urban</option>
-            </select>
-          </label>
-          <label>
-            Medical History:
-            <select
-              name="medical_history"
-              value={disorder?.medical_history || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Diabetes</option>
-              <option value={1}>Asthma</option>
-              <option value={2}>None</option>
-              <option value={3}>Heart disease</option>
-            </select>
-          </label>
-          <label>
-            Psychiatric History:
-            <select
-              name="psychiatric_history"
-              value={disorder?.psychiatric_history || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Bipolar disorder</option>
-              <option value={1}>Anxiety disorder</option>
-              <option value={2}>Depressive disorder</option>
-              <option value={3}>None</option>
-            </select>
-          </label>
-          <label>
-            Substance Use:
-            <select
-              name="substance_use"
-              value={disorder?.substance_use || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>None</option>
-              <option value={1}>Drugs</option>
-              <option value={2}>Alcohol</option>
-            </select>
-          </label>
-          <label>
-            Coping Mechanisms:
-            <select
-              name="coping_mechanisms"
-              value={disorder?.coping_mechanisms || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Socializing </option>
-              <option value={1}>Exercise </option>
-              <option value={2}>Seeking therapy</option>
-              <option value={3}>Meditation </option>
-            </select>
-          </label>
-          <label>
-            Social Support:
-            <select
-              name="social_support"
-              value={disorder?.social_support || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>High</option>
-              <option value={1}>Moderate</option>
-              <option value={2}>Low</option>
-            </select>
-          </label>
-          <label>
-            Lifestyle Factors:
-            <select
-              name="lifestyle_factors"
-              value={disorder?.lifestyle_factors || 0}
-              onChange={handleChange}
-            >
-              <option value={0}>Sleep quality</option>
-              <option value={1}>Exercise</option>
-              <option value={2}>Diet</option>
-            </select>
-          </label>
-          <div className={editButtonsClassName}>
-            <DefaultButton
-              className={saveButtonClassName}
-              text="Save"
-              onClick={handleSave}
-            />
-            <DefaultButton
-              className={cancelButtonClassName}
-              text="Cancel"
-              onClick={handleCancel}
-            />
+        <div className={parenteditDisorderClassName}>
+          <div className={editDisorderClassName}>
+            <label>
+              Age:
+              <input
+                type="number"
+                name="age"
+                className={inputStyle}
+                value={disorder?.age}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Gender:
+              <select
+                className={inputStyle}
+                name="gender"
+                value={disorder?.gender}
+                onChange={handleChange}
+              >
+                <option value={"Male"}>Male</option>
+                <option value={"Female"}>Female</option>
+              </select>
+            </label>
+            <label>
+              Family History:
+              <select
+                className={inputStyle}
+                name="family_history"
+                value={disorder?.family_history}
+                onChange={handleChange}
+              >
+                <option value={"No"}>No</option>
+                <option value={"Yes"}>Yes</option>
+              </select>
+            </label>
+            <label>
+              Personal History:
+              <select
+                className={inputStyle}
+                name="personal_history"
+                value={disorder?.personal_history}
+                onChange={handleChange}
+              >
+                <option value={"No"}>No</option>
+                <option value={"Yes"}>Yes</option>
+              </select>
+            </label>
+            <label>
+              Current Stressors:
+              <select
+                className={inputStyle}
+                name="current_stressors"
+                value={disorder?.current_stressors}
+                onChange={handleChange}
+              >
+                <option value={"Moderate"}>Moderate</option>
+                <option value={"High"}>High</option>
+                <option value={"Low"}>Low</option>
+              </select>
+            </label>
+            <label>
+              Symptoms:
+              <select
+                className={inputStyle}
+                name="symptoms"
+                value={disorder?.symptoms}
+                onChange={handleChange}
+              >
+                {" "}
+                <option value={"Shortness of breath"}>
+                  Shortness of breath
+                </option>
+                <option value={"Panic attacks"}>Panic attacks</option>
+                <option value={"Chest pain"}>Chest pain</option>
+                <option value={"Dizziness"}>Dizziness</option>
+                <option value={"Fear of losing control"}>
+                  Fear of losing control
+                </option>
+              </select>
+            </label>
+            <label>
+              Severity:
+              <select
+                className={inputStyle}
+                name="severity"
+                value={disorder?.severity}
+                onChange={handleChange}
+              >
+                <option value={"Mild"}>Mild</option>
+                <option value={"Moderate"}>Moderate</option>
+                <option value={"Severe"}>Severe</option>
+              </select>
+            </label>
+            <label>
+              Impact on Life:
+              <select
+                className={inputStyle}
+                name="impact_on_life"
+                value={disorder?.impact_on_life}
+                onChange={handleChange}
+              >
+                <option value={"Mild"}>Mild</option>
+                <option value={"Significant"}>Significant</option>
+                <option value={"Moderate"}>Moderate</option>
+              </select>
+            </label>
+            <label>
+              Demographics:
+              <select
+                className={inputStyle}
+                name="demographics"
+                value={disorder?.demographics}
+                onChange={handleChange}
+              >
+                <option value={"Urban"}>Urban</option>
+                <option value={"Rural"}>Rural</option>
+              </select>
+            </label>
+            <label>
+              Medical History:
+              <select
+                className={inputStyle}
+                name="medical_history"
+                value={disorder?.medical_history}
+                onChange={handleChange}
+              >
+                <option value={"Diabetes"}>Diabetes</option>
+                <option value={"Asthma"}>Asthma</option>
+                <option value={"Heart disease"}>Heart disease</option>
+              </select>
+            </label>
+            <label>
+              Psychiatric History:
+              <select
+                className={inputStyle}
+                name="psychiatric_history"
+                value={disorder?.psychiatric_history}
+                onChange={handleChange}
+              >
+                <option value={"Bipolar disorder"}>Bipolar disorder</option>
+                <option value={"Anxiety disorder"}>Anxiety disorder</option>
+                <option value={"Depressive disorder"}>
+                  Depressive disorder
+                </option>
+              </select>
+            </label>
+            <label>
+              Substance Use:
+              <select
+                className={inputStyle}
+                name="substance_use"
+                value={disorder?.substance_use}
+                onChange={handleChange}
+              >
+                <option value={"Drugs"}>Drugs</option>
+                <option value={"Alcohol"}>Alcohol</option>
+              </select>
+            </label>
+            <label>
+              Coping Mechanisms:
+              <select
+                className={inputStyle}
+                name="coping_mechanisms"
+                value={disorder?.coping_mechanisms}
+                onChange={handleChange}
+              >
+                <option value={"Socializing"}>Socializing </option>
+                <option value={"Exercise"}>Exercise </option>
+                <option value={"Seeking therapy"}>Seeking therapy</option>
+                <option value={"Meditation"}>Meditation </option>
+              </select>
+            </label>
+            <label>
+              Social Support:
+              <select
+                className={inputStyle}
+                name="social_support"
+                value={disorder?.social_support}
+                onChange={handleChange}
+              >
+                <option value={"High"}>High</option>
+                <option value={"Moderate"}>Moderate</option>
+                <option value={"Low"}>Low</option>
+              </select>
+            </label>
+            <label>
+              Lifestyle Factors:
+              <select
+                className={inputStyle}
+                name="lifestyle_factors"
+                value={disorder?.lifestyle_factors}
+                onChange={handleChange}
+              >
+                <option value={"Sleep quality"}>Sleep quality</option>
+                <option value={"Exercise"}>Exercise</option>
+                <option value={"Diet"}>Diet</option>
+              </select>
+            </label>
+            <div className={editButtonsClassName}>
+              <DefaultButton
+                className={saveButtonClassName}
+                text="Save"
+                onClick={handleSave}
+              />
+              <DefaultButton
+                className={cancelButtonClassName}
+                text="Cancel"
+                onClick={handleCancel}
+              />
+            </div>
           </div>
         </div>
       ) : (
-        <div className={viewDisorderClassName}>
-          <h1>Disorder Details</h1>
-          <p>
-            <strong>Age:</strong> {disorder?.age}
-          </p>
-          <p>
-            <strong>Gender:</strong>{" "}
-            {disorder?.gender === 0 ? "Male" : "Female"}
-          </p>
-          <p>
-            <strong>Family History:</strong>{" "}
-            {disorder?.family_history === 0 ? "No" : "Yes"}
-          </p>
-          <p>
-            <strong>Personal History:</strong>{" "}
-            {disorder?.personal_history === 0 ? "No" : "Yes"}
-          </p>
-          <p>
-            <strong>Current Stressors:</strong>{" "}
-            {disorder?.current_stressors === 0
-              ? "High"
-              : disorder?.current_stressors === 1
-              ? "Moderate"
-              : "Low"}
-          </p>
-          <p>
-            <strong>Symptoms:</strong>{" "}
-            {disorder?.symptoms === 0 ? "No Panic attacks" : "Panic attacks"}
-          </p>
-          <p>
-            <strong>Severity:</strong>{" "}
-            {disorder?.severity === 0
-              ? "Mild"
-              : disorder?.severity === 1
-              ? "Moderate"
-              : "Severe"}
-          </p>
-          <p>
-            <strong>Impact on Life:</strong>{" "}
-            {disorder?.impact_on_life === 0
-              ? "Mild"
-              : disorder?.impact_on_life === 1
-              ? "Moderate"
-              : "Severe"}
-          </p>
-          <p>
-            <strong>Demographics:</strong>{" "}
-            {disorder?.demographics === 0 ? "Rural" : "Urban"}
-          </p>
-          <p>
-            <strong>Medical History:</strong>{" "}
-            {disorder?.medical_history === 0 ? "No" : "Yes"}
-          </p>
-          <p>
-            <strong>Psychiatric History:</strong>{" "}
-            {disorder?.psychiatric_history === 0
-              ? "None"
-              : disorder?.psychiatric_history === 1
-              ? "Other"
-              : "Depressive disorder"}
-          </p>
-          <p>
-            <strong>Substance Use:</strong>{" "}
-            {disorder?.substance_use === 0 ? "No Drugs" : "Drugs"}
-          </p>
-          <p>
-            <strong>Coping Mechanisms:</strong>{" "}
-            {disorder?.coping_mechanisms === 0 ? "Socializing" : "Other"}
-          </p>
-          <p>
-            <strong>Social Support:</strong>{" "}
-            {disorder?.social_support === 0
-              ? "High"
-              : disorder?.social_support === 1
-              ? "Moderate"
-              : "Low"}
-          </p>
-          <p>
-            <strong>Lifestyle Factors:</strong>{" "}
-            {disorder?.lifestyle_factors === 0
-              ? "Sleep quality"
-              : disorder?.lifestyle_factors === 1
-              ? "Exercise"
-              : "Diet"}
-          </p>
-          <div className={buttonsClassName}>
-            <DefaultButton
-              className={editButtonClassName}
-              text="Edit"
-              onClick={handleEdit}
-            />
-            <DefaultButton
-              className={deleteButtonClassName}
-              text="Delete"
-              onClick={() => setConfirmDelete(true)}
-            />
-            <DefaultButton
-              className={cancelButtonClassName}
-              text="Cancel"
-              onClick={handleCancelEdit}
-            />
-          </div>
-          <Dialog
-            hidden={!confirmDelete}
-            onDismiss={() => setConfirmDelete(false)}
-            dialogContentProps={{
-              type: DialogType.normal,
-              title: "Delete Disorder",
-              subText: "Are you sure you want to delete this disorder?",
-            }}
-          >
-            <DialogFooter className={confirmationsClassName}>
-              <PrimaryButton
-                className={confirmationDeleteButtonClassName}
-                onClick={handleDelete}
-                text="Delete"
+        <div className={parenteditDisorderClassName}>
+          <div className={viewDisorderClassName}>
+            <h2 style={{ fontSize: "40px" }}>Disorder Details</h2>
+            <p>
+              <strong>Age:</strong> {disorder?.age}
+            </p>
+            <p>
+              <strong>Gender:</strong> {disorder?.gender}
+            </p>
+            <p>
+              <strong>Family History:</strong> {disorder?.family_history}
+            </p>
+            <p>
+              <strong>Personal History:</strong> {disorder?.personal_history}
+            </p>
+            <p>
+              <strong>Current Stressors:</strong> {disorder?.current_stressors}
+            </p>
+            <p>
+              <strong>Symptoms:</strong> {disorder?.symptoms}
+            </p>
+            <p>
+              <strong>Severity:</strong> {disorder?.severity}
+            </p>
+            <p>
+              <strong>Impact on Life:</strong> {disorder?.impact_on_life}
+            </p>
+            <p>
+              <strong>Demographics:</strong> {disorder?.demographics}
+            </p>
+            <p>
+              <strong>Medical History:</strong> {disorder?.medical_history}
+            </p>
+            <p>
+              <strong>Psychiatric History:</strong>{" "}
+              {disorder?.psychiatric_history}
+            </p>
+            <p>
+              <strong>Substance Use:</strong> {disorder?.substance_use}
+            </p>
+            <p>
+              <strong>Coping Mechanisms:</strong> {disorder?.coping_mechanisms}
+            </p>
+            <p>
+              <strong>Social Support:</strong> {disorder?.social_support}
+            </p>
+            <p>
+              <strong>Lifestyle Factors:</strong> {disorder?.lifestyle_factors}
+            </p>
+            <div className={buttonsClassName}>
+              <DefaultButton
+                className={editButtonClassName}
+                text="Edit"
+                onClick={handleEdit}
               />
               <DefaultButton
-                className={confirmationCancelButtonClassName}
-                onClick={() => setConfirmDelete(false)}
-                text="Cancel"
+                className={deleteButtonClassName}
+                text="Delete"
+                onClick={() => setConfirmDelete(true)}
               />
-            </DialogFooter>
-          </Dialog>
+              <DefaultButton
+                className={cancelButtonClassName}
+                text="Cancel"
+                onClick={handleCancelEdit}
+              />
+            </div>
+            <Dialog
+              hidden={!confirmDelete}
+              onDismiss={() => setConfirmDelete(false)}
+              dialogContentProps={{
+                type: DialogType.normal,
+                title: "Delete Disorder",
+                subText: "Are you sure you want to delete this disorder?",
+              }}
+            >
+              <DialogFooter className={confirmationsClassName}>
+                <PrimaryButton
+                  className={confirmationDeleteButtonClassName}
+                  onClick={handleDelete}
+                  text="Delete"
+                />
+                <DefaultButton
+                  className={confirmationCancelButtonClassName}
+                  onClick={() => setConfirmDelete(false)}
+                  text="Cancel"
+                />
+              </DialogFooter>
+            </Dialog>
+          </div>
         </div>
       )}
     </div>

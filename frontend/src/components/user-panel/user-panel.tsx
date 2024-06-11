@@ -5,12 +5,14 @@ interface UserPanelProps {
   onLogout: () => void;
   onGoToAccount: () => void;
   onGoToDisorder: () => void;
+  onGoToPredict: () => void;
 }
 
 export const UserPanel = ({
   onLogout,
   onGoToAccount,
   onGoToDisorder,
+  onGoToPredict,
 }: UserPanelProps) => {
   return (
     <Stack tokens={{ childrenGap: 10 }} className={userPanelClassName}>
@@ -28,6 +30,11 @@ export const UserPanel = ({
         className={logoutButtonClassName}
         text="Disorders"
         onClick={onGoToDisorder}
+      />
+      <DefaultButton
+        className={logoutButtonClassName}
+        text="Predict"
+        onClick={onGoToPredict}
       />
     </Stack>
   );

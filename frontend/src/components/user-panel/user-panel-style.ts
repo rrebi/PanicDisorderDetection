@@ -1,5 +1,5 @@
 import { mergeStyles } from "@fluentui/react";
-import { BACKGROUND_COLOR, BLACK_COLOR, FONT_FAMILY, PEACH_COLOR, WHITE_COLOR } from "../../constants";
+import { BACKGROUND_COLOR, BLACK_COLOR, D_PURPLE, FONT_FAMILY, WHITE_COLOR } from "../../constants";
 
 export const userPanelClassName = mergeStyles({
     display: "flex",
@@ -12,7 +12,7 @@ export const userPanelClassName = mergeStyles({
 });
 
 export const logoutButtonClassName = mergeStyles({
-    backgroundColor: PEACH_COLOR,
+    backgroundColor: D_PURPLE,
     color: WHITE_COLOR,
     border: "none",
     borderRadius: "15px",
