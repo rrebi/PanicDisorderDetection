@@ -81,18 +81,13 @@ export const DisorderPage = () => {
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type } = event.target;
-    let val: string | number = value;
+    const { name, value } = event.target;
 
-    if (type === "number") {
-      val = parseInt(value, 10);
-
-      console.log(`Updating formData.${name} to:`, val);
-      setDisorder((prevDisorder) => ({
-        ...prevDisorder!,
-        [name]: val,
-      }));
-    }
+    console.log(`Updating disorder.${name} to:`, value);
+    setDisorder((prevDisorder) => ({
+      ...prevDisorder!,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
